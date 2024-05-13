@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../config/database');
-const Course = require('../Course');
+const Course = require('./Course');
 
 const GolfClub = sequelize.define('golf_club', {
     name: {
