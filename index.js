@@ -32,7 +32,7 @@ app.use((err, req, res, next) => {
 process.on('SIGINT', async () => {
     console.log('Shutting down server...');
     try {
-        await sequelize.close(); // Close database connection
+        await sequelize.close();
         server.close(() => {
             console.log('Server closed');
             process.exit(0);
