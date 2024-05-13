@@ -1,9 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const GolfClub = require('./models/GolfClub');
-const Course = require('./models/Course');
-const Hole = require('./models/Hole');
-const TeeBox = require('./models/TeeBox');
+const GolfClub = require('../models/GolfClub');
+const Hole = require('../models/Hole');
+const TeeBox = require('../models/TeeBox');
 
 // Get all golf clubs
 router.get('/', async (req, res) => {
@@ -27,14 +26,12 @@ router.get('/', async (req, res) => {
 // POST a new golf club
 router.post('/', async (req, res) => {
     try {
-        const club = await GolfClub.create(req.body);
+        const newClub = await GolfClub.create(req.body);
         res.status(201).json(newClub);
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Server error' });
     }
 });
-
-// Add more routes for editing and deleting later
 
 module.exports = router;

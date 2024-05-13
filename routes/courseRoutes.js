@@ -31,6 +31,4 @@ router.post('/', async (req, res) => {
     }
 });
 
-// Add more routes for editing and deleting later
-
 module.exports = router;
