@@ -9,6 +9,10 @@ app.use('/api/courses', require('./routes/courseRoutes'));
 app.use('/api/holes', require('./routes/holeRoutes'));
 app.use('/api/tee-boxes', require('./routes/teeBoxRoutes'));
 
+app.get('/', (req, res) => {
+    res.send('Welcome to the Golf API!');
+});
+
 const PORT = process.env.PORT || 3000;
 const server = app.listen(PORT, async () => {
     console.log(`Server running on port ${PORT}`);
@@ -38,4 +42,3 @@ process.on('SIGINT', async () => {
         process.exit(1);
     }
 });
-

@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const GolfClub = require('../models/GolfClub');
-const Course = require('../models/Course');
-const Hole = require('../models/Hole');
-const TeeBox = require('../models/TeeBox');
+const GolfClub = require('./models/GolfClub');
+const Course = require('./models/Course');
+const Hole = require('./models/Hole');
+const TeeBox = require('./models/TeeBox');
 
 // Get all golf clubs
 router.get('/', async (req, res) => {

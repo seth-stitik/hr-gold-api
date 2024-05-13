@@ -3,7 +3,7 @@ const { sequelize } = require('../config/database');
 const Course = require('./Course');
 
 const GolfClub = sequelize.define('golf_club', {
-    name : {
+    name: {
         type: DataTypes.STRING,
         primaryKey: true,
         allowNull: false
