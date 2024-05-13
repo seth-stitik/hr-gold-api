@@ -10,7 +10,7 @@ app.use('/api/holes', require('./routes/holeRoutes'));
 app.use('/api/tee-boxes', require('./routes/teeBoxRoutes'));
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, async () => {
+const server = app.listen(PORT, async () => {
     console.log(`Server running on port ${PORT}`);
     try {
         await sequelize.authenticate();
@@ -19,3 +19,23 @@ app.listen(PORT, async () => {
         console.error('Database connection failed');
     }
 });
+
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
+});
+
+process.on('SIGINT', async () => {
+    console.log('Shutting down server...');
+    try {
+        await sequelize.close(); // Close database connection
+        server.close(() => {
+            console.log('Server closed');
+            process.exit(0);
+        });
+    } catch (error) {
+        console.error('Error occurred during shutdown:', error);
+        process.exit(1);
+    }
+});
+
