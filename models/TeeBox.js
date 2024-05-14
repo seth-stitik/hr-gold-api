@@ -2,11 +2,6 @@ const { DataTypes } = require('sequelize');
 const { sequelize } = require('../config/database');
 
 const TeeBox = sequelize.define('TeeBox', {
-  id: {
-    type: DataTypes.INTEGER,
-    autoIncrement: true,
-    primaryKey: true,
-  },
   teetype: {
     type: DataTypes.STRING,
     allowNull: false
