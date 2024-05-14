@@ -4,11 +4,13 @@ const { sequelize } = require('../config/database');
 const TeeBox = sequelize.define('TeeBox', {
   teetype: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
+    primaryKey: true
   },
   teeColor: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
+    primaryKey: true
   },
   distance: {
     type: DataTypes.INTEGER,
@@ -17,6 +19,7 @@ const TeeBox = sequelize.define('TeeBox', {
   holeNumber: {
     type: DataTypes.INTEGER,
     allowNull: false,
+    primaryKey: true,
     references: {
       model: 'holes',
       key: 'holeNumber'
@@ -26,8 +29,7 @@ const TeeBox = sequelize.define('TeeBox', {
   }
 }, {
   tableName: 'tee_boxes',
-  timestamps: true,
-  primaryKey: ['teetype', 'teeColor', 'holeNumber']
+  timestamps: true
 });
 
 TeeBox.associate = (models) => {
