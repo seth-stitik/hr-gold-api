@@ -26,7 +26,8 @@ const TeeBox = sequelize.define('TeeBox', {
   }
 }, {
   tableName: 'tee_boxes',
-  timestamps: true
+  timestamps: true,
+  primaryKey: ['teetype', 'teeColor', 'holeNumber']
 });
 
 TeeBox.associate = (models) => {
