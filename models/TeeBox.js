@@ -1,14 +1,17 @@
 module.exports = (sequelize, DataTypes) => {
     const TeeBox = sequelize.define('TeeBox', {
+      id: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+      },
       teetype: {
         type: DataTypes.STRING,
-        allowNull: false,
-        primaryKey: true
+        allowNull: false
       },
       teeColor: {
         type: DataTypes.STRING,
-        allowNull: false,
-        primaryKey: true
+        allowNull: false
       },
       distance: {
         type: DataTypes.INTEGER,
@@ -16,16 +19,8 @@ module.exports = (sequelize, DataTypes) => {
       },
       holeNumber: {
         type: DataTypes.INTEGER,
-        allowNull: false,
-        primaryKey: true,
-        references: {
-          model: 'holes',
-          key: 'holeNumber'
-        }
+        allowNull: false
       }
-    }, {
-      timestamps: true,
-      tableName: 'tee_boxes'  // Explicitly specify the table name
     });
   
     TeeBox.associate = (models) => {

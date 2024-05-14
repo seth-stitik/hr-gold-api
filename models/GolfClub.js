@@ -36,9 +36,22 @@ module.exports = (sequelize, DataTypes) => {
       measureUnit: {
         type: DataTypes.STRING,
         allowNull: false
+      },
+      clubID: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true
+      },
+      createdAt: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: DataTypes.NOW
+      },
+      updatedAt: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: DataTypes.NOW
       }
-    }, {
-      tableName: 'golf_clubs'  // Explicitly specify the table name
     });
   
     GolfClub.associate = (models) => {
