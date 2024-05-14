@@ -2,7 +2,6 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    // Create golf_clubs table
     await queryInterface.createTable('golf_clubs', {
       name: {
         type: Sequelize.STRING,
@@ -53,7 +52,6 @@ module.exports = {
       }
     });
 
-    // Create courses table
     await queryInterface.createTable('courses', {
       courseID: {
         type: Sequelize.STRING,
@@ -94,7 +92,6 @@ module.exports = {
       }
     });
 
-    // Create holes table
     await queryInterface.createTable('holes', {
       holeNumber: {
         type: Sequelize.INTEGER,
@@ -135,7 +132,6 @@ module.exports = {
       }
     });
 
-    // Create tee_boxes table
     await queryInterface.createTable('tee_boxes', {
       teetype: {
         type: Sequelize.STRING,

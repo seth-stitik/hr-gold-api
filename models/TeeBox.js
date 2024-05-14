@@ -19,13 +19,13 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         primaryKey: true,
         references: {
-          model: 'holes',
+          model: 'Holes',
           key: 'holeNumber'
         }
       }
     }, {
       timestamps: true,
-      tableName: 'tee_boxes'
+      tableName: 'tee_boxes' // Explicitly set the table name
     });
   
     TeeBox.associate = (models) => {
