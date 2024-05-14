@@ -1,28 +1,29 @@
-const { DataTypes } = require('sequelize');
-const { sequelize } = require('../config/database');
-const TeeBox = require('./TeeBox'); 
-
-const Hole = sequelize.define('Hole', {
-    holeNumber: {
+module.exports = (sequelize, DataTypes) => {
+    const Hole = sequelize.define('Hole', {
+      holeNumber: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         allowNull: false
-    },
-    par: {
+      },
+      par: {
         type: DataTypes.INTEGER,
         allowNull: false
-    },
-    yardage: {
+      },
+      yardage: {
         type: DataTypes.INTEGER,
         allowNull: false
-    },
-    handicap: {
+      },
+      handicap: {
         type: DataTypes.INTEGER,
         allowNull: false
-    }
-});
-
-Hole.hasMany(TeeBox, { foreignKey: 'holeNumber' });
-TeeBox.belongsTo(Hole, { foreignKey: 'holeNumber' });
-
-module.exports = Hole;
+      }
+    });
+  
+    Hole.associate = (models) => {
+      Hole.hasMany(models.TeeBox, { foreignKey: 'holeNumber' });
+      Hole.belongsTo(models.Course, { foreignKey: 'courseID' });
+    };
+  
+    return Hole;
+  };
+  

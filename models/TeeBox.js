@@ -1,36 +1,37 @@
-const { DataTypes } = require('sequelize');
-const { sequelize } = require('../config/database');
-const Hole = require('./Hole');
-
-const TeeBox = sequelize.define('TeeBox', {
-    teetype: {
+module.exports = (sequelize, DataTypes) => {
+    const TeeBox = sequelize.define('TeeBox', {
+      teetype: {
         type: DataTypes.STRING,
         allowNull: false,
         primaryKey: true
-    },
-    teeColor: {
+      },
+      teeColor: {
         type: DataTypes.STRING,
         allowNull: false,
         primaryKey: true
-    },
-    distance: {
+      },
+      distance: {
         type: DataTypes.INTEGER,
         allowNull: false
-    },
-    holeNumber: {
+      },
+      holeNumber: {
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
         references: {
-            model: 'Holes',
-            key: 'holeNumber'
+          model: 'Holes',
+          key: 'holeNumber'
         }
-    }
-}, {
-    timestamps: true,
-    tableName: 'tee_boxes'
-});
-
-TeeBox.belongsTo(Hole, { foreignKey: 'holeNumber' });
-
-module.exports = TeeBox;
+      }
+    }, {
+      timestamps: true,
+      tableName: 'tee_boxes'
+    });
+  
+    TeeBox.associate = (models) => {
+      TeeBox.belongsTo(models.Hole, { foreignKey: 'holeNumber' });
+    };
+  
+    return TeeBox;
+  };
+  

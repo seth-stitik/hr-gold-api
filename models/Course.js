@@ -1,36 +1,36 @@
-const { DataTypes } = require('sequelize');
-const { sequelize } = require('../config/database');
-const Hole = require('./Hole'); 
-
-const Course = sequelize.define('Course', {
-    courseID: {
+module.exports = (sequelize, DataTypes) => {
+    const Course = sequelize.define('Course', {
+      courseID: {
         type: DataTypes.STRING,
         primaryKey: true,
         allowNull: false
-    },
-    courseName: {
+      },
+      courseName: {
         type: DataTypes.STRING,
         allowNull: false
-    },
-    numHoles: {
+      },
+      numHoles: {
         type: DataTypes.INTEGER,
         allowNull: false
-    },
-    timeStampUpdated: {
+      },
+      timeStampUpdated: {
         type: DataTypes.BIGINT,
         allowNull: false
-    },
-    golfClubName: {
+      },
+      golfClubName: {
         type: DataTypes.STRING,
         allowNull: false,
         references: {
-            model: 'GolfClubs',
-            key: 'name'
+          model: 'GolfClubs',
+          key: 'name'
         }
-    }
-});
-
-Course.hasMany(Hole, { foreignKey: 'courseID' });
-Hole.belongsTo(Course, { foreignKey: 'courseID' });
-
-module.exports = Course;
+      }
+    });
+  
+    Course.associate = (models) => {
+      Course.hasMany(models.Hole, { foreignKey: 'courseID' });
+    };
+  
+    return Course;
+  };
+  
