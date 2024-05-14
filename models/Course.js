@@ -1,37 +1,38 @@
-module.exports = (sequelize, DataTypes) => {
-    const Course = sequelize.define('Course', {
-      courseID: {
-        type: DataTypes.STRING,
-        primaryKey: true,
-        allowNull: false
+const { DataTypes } = require('sequelize');
+
+module.exports = (sequelize) => {
+  const Course = sequelize.define('Course', {
+    courseID: {
+      type: DataTypes.STRING,
+      primaryKey: true,
+      allowNull: false
+    },
+    courseName: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    numHoles: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    timeStampUpdated: {
+      type: DataTypes.BIGINT,
+      allowNull: false
+    },
+    golfClubName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      references: {
+        model: 'golf_clubs',
+        key: 'name'
       },
-      courseName: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
-      numHoles: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-      },
-      timeStampUpdated: {
-        type: DataTypes.BIGINT,
-        allowNull: false
-      },
-      golfClubName: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        references: {
-          model: 'golf_clubs',
-          key: 'name'
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
-      }
-    }, {
-      tableName: 'courses',
-      timestamps: true
-    });
-  
-    return Course;
-  };
-  
+      onUpdate: 'CASCADE',
+      onDelete: 'CASCADE'
+    }
+  }, {
+    tableName: 'courses',
+    timestamps: true
+  });
+
+  return Course;
+};

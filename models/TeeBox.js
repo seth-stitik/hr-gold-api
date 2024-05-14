@@ -19,8 +19,17 @@ module.exports = (sequelize, DataTypes) => {
       },
       holeNumber: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        references: {
+          model: 'holes',
+          key: 'holeNumber'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
       }
+    }, {
+      tableName: 'tee_boxes',
+      timestamps: true
     });
   
     TeeBox.associate = (models) => {
