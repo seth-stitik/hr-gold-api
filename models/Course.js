@@ -25,11 +25,12 @@ module.exports = (sequelize, DataTypes) => {
           key: 'name'
         }
       }
+    }, {
+      tableName: 'courses'  // Explicitly specify the table name
     });
   
     Course.associate = (models) => {
       Course.hasMany(models.Hole, { foreignKey: 'courseID' });
-      Course.belongsTo(models.GolfClub, { foreignKey: 'golfClubName' });
     };
   
     return Course;

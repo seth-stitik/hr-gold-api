@@ -21,10 +21,12 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
         references: {
-          model: 'Courses',
+          model: 'courses',
           key: 'courseID'
         }
       }
+    }, {
+      tableName: 'holes'  // Explicitly specify the table name
     });
   
     Hole.associate = (models) => {

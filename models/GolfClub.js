@@ -38,7 +38,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false
       }
     }, {
-      tableName: 'golf_clubs' // Explicitly set the table name
+      tableName: 'golf_clubs'  // Explicitly specify the table name
     });
   
     GolfClub.associate = (models) => {
