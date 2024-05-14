@@ -26,6 +26,14 @@ const Course = sequelize.define('Course', {
       model: 'golf_clubs',
       key: 'name'
     },
+    clubID: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        references: {
+          model: 'golf_clubs',
+          key: 'clubID'
+        },
+    },
     onUpdate: 'CASCADE',
     onDelete: 'CASCADE'
   }

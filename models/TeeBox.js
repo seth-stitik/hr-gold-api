@@ -26,10 +26,27 @@ const TeeBox = sequelize.define('TeeBox', {
     },
     onUpdate: 'CASCADE',
     onDelete: 'CASCADE'
+  },
+  courseID: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    references: {
+      model: 'courses',
+      key: 'courseID'
+    }
+  },
+  clubID: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    references: {
+      model: 'golf_clubs',
+      key: 'clubID'
+    }
   }
 }, {
   tableName: 'tee_boxes',
-  timestamps: true
+  timestamps: true,
+  primaryKey: ['teetype', 'teeColor', 'holeNumber']
 });
 
 TeeBox.associate = (models) => {
