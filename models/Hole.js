@@ -16,6 +16,14 @@ module.exports = (sequelize, DataTypes) => {
       handicap: {
         type: DataTypes.INTEGER,
         allowNull: false
+      },
+      courseID: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        references: {
+          model: 'Courses',
+          key: 'courseID'
+        }
       }
     });
   
