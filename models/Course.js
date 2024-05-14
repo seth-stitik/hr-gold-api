@@ -19,6 +19,14 @@ const Course = sequelize.define('course', {
     timeStampUpdated: {
         type: DataTypes.BIGINT,
         allowNull: false
+    },
+    golfClubName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        references: {
+            model: 'golf_clubs',
+            key: 'name'
+        }
     }
 });
 

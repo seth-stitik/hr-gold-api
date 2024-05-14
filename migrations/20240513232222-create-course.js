@@ -21,13 +21,25 @@ module.exports = {
         type: Sequelize.BIGINT,
         allowNull: false
       },
-      createdAt: {
+      golfClubName: {
+        type: Sequelize.STRING,
         allowNull: false,
-        type: Sequelize.DATE
+        references: {
+            model: 'golf_clubs',
+            key: 'name'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
+      },
+      createdAt: {
+        type: Sequelize.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.NOW
       },
       updatedAt: {
+        type: Sequelize.DATE,
         allowNull: false,
-        type: Sequelize.DATE
+        defaultValue: Sequelize.NOW
       }
     });
   },
