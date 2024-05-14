@@ -6,35 +6,38 @@ module.exports = {
     await queryInterface.createTable('tee_boxes', {
       teetype: {
         type: Sequelize.STRING,
-        primaryKey: true,
-        allowNull: false
+        allowNull: false,
+        primaryKey: true
       },
       teeColor: {
         type: Sequelize.STRING,
-        primaryKey: true,
-        allowNull: false
+        allowNull: false,
+        primaryKey: true
       },
       distance: {
-        type: Sequelize.FLOAT,
+        type: Sequelize.INTEGER,
         allowNull: false
       },
       holeNumber: {
         type: Sequelize.INTEGER,
+        allowNull: false,
+        primaryKey: true,
         references: {
           model: 'holes',
           key: 'holeNumber'
         },
-        allowNull: false,
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
       },
       createdAt: {
+        type: Sequelize.DATE,
         allowNull: false,
-        type: Sequelize.DATE
+        defaultValue: Sequelize.NOW
       },
       updatedAt: {
+        type: Sequelize.DATE,
         allowNull: false,
-        type: Sequelize.DATE
+        defaultValue: Sequelize.NOW
       }
     });
   },
