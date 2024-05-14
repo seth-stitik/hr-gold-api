@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize');
 const { sequelize } = require('../config/database');
 const TeeBox = require('./TeeBox'); 
 
-const Hole = sequelize.define('hole', {
+const Hole = sequelize.define('Hole', {
     holeNumber: {
         type: DataTypes.INTEGER,
         primaryKey: true,

@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize');
 const { sequelize } = require('../config/database');
 const Hole = require('./Hole'); 
 
-const Course = sequelize.define('course', {
+const Course = sequelize.define('Course', {
     courseID: {
         type: DataTypes.STRING,
         primaryKey: true,
@@ -24,7 +24,7 @@ const Course = sequelize.define('course', {
         type: DataTypes.STRING,
         allowNull: false,
         references: {
-            model: 'golf_clubs',
+            model: 'GolfClubs',
             key: 'name'
         }
     }

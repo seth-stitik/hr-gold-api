@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize');
 const { sequelize } = require('../config/database');
 const Hole = require('./Hole');
 
-const TeeBox = sequelize.define('tee_box', {
+const TeeBox = sequelize.define('TeeBox', {
     teetype: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -22,7 +22,7 @@ const TeeBox = sequelize.define('tee_box', {
         allowNull: false,
         primaryKey: true,
         references: {
-            model: 'holes',
+            model: 'Holes',
             key: 'holeNumber'
         }
     }

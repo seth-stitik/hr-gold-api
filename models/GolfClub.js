@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize');
 const { sequelize } = require('../config/database');
 const Course = require('./Course');
 
-const GolfClub = sequelize.define('golf_club', {
+const GolfClub = sequelize.define('GolfClub', {
     name: {
         type: DataTypes.STRING,
         primaryKey: true,
