@@ -26,7 +26,8 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     }, {
-      tableName: 'holes'  // Explicitly specify the table name
+      tableName: 'holes',
+      timestamps: true
     });
   
     Hole.associate = (models) => {

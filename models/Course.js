@@ -34,5 +34,10 @@ module.exports = (sequelize) => {
     timestamps: true
   });
 
+  Course.associate = (models) => {
+    Course.belongsTo(models.GolfClub, { foreignKey: 'golfClubName' });
+    Course.hasMany(models.Hole, { foreignKey: 'courseID' });
+  };
+
   return Course;
 };
