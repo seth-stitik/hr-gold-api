@@ -1,48 +1,50 @@
-module.exports = (sequelize, DataTypes) => {
-    const GolfClub = sequelize.define('GolfClub', {
-      name: {
+// GolfClub.js
+const { DataTypes } = require('sequelize');
+const { sequelize } = require('../config/database');
+const Course = require('./Course');
+
+const GolfClub = sequelize.define('GolfClub', {
+    name: {
         type: DataTypes.STRING,
         primaryKey: true,
         allowNull: false
-      },
-      clubName: {
+    },
+    clubName: {
         type: DataTypes.STRING,
         allowNull: false
-      },
-      city: {
+    },
+    city: {
         type: DataTypes.STRING,
         allowNull: false
-      },
-      state: {
+    },
+    state: {
         type: DataTypes.STRING,
         allowNull: false
-      },
-      country: {
+    },
+    country: {
         type: DataTypes.STRING,
         allowNull: false
-      },
-      zipCode: {
+    },
+    zipCode: {
         type: DataTypes.STRING,
         allowNull: false
-      },
-      timeStampUpdated: {
+    },
+    timeStampUpdated: {
         type: DataTypes.BIGINT,
         allowNull: false
-      },
-      distance: {
+    },
+    distance: {
         type: DataTypes.FLOAT,
         allowNull: false
-      },
-      measureUnit: {
+    },
+    measureUnit: {
         type: DataTypes.STRING,
         allowNull: false
-      }
-    });
-  
-    GolfClub.associate = (models) => {
-      GolfClub.hasMany(models.Course, { foreignKey: 'golfClubName' });
-    };
-  
-    return GolfClub;
-  };
-  
+    }
+}, {
+    tableName: 'golf_clubs' // Explicitly set the table name
+});
+
+GolfClub.hasMany(Course, { foreignKey: 'golfClubName' });
+
+module.exports = GolfClub;

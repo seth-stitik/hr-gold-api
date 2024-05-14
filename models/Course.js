@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
         references: {
-          model: 'GolfClubs',
+          model: 'golf_clubs',
           key: 'name'
         }
       }
