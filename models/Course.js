@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../config/database');
-const Hole = require('./Hole');
+const Hole = require('./Hole'); 
 
 const Course = sequelize.define('course', {
     courseID: {
@@ -31,5 +31,6 @@ const Course = sequelize.define('course', {
 });
 
 Course.hasMany(Hole, { foreignKey: 'courseID' });
+Hole.belongsTo(Course, { foreignKey: 'courseID' });
 
 module.exports = Course;

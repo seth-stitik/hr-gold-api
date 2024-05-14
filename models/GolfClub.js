@@ -43,5 +43,6 @@ const GolfClub = sequelize.define('golf_club', {
 });
 
 GolfClub.hasMany(Course, { foreignKey: 'golfClubName' });
+Course.belongsTo(GolfClub, { foreignKey: 'golfClubName' });
 
 module.exports = GolfClub;

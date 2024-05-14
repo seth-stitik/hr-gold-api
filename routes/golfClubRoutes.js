@@ -1,16 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const { sequelize } = require('../config/database'); // Ensure this import is correct
-const GolfClub = require('../models/GolfClub');
-const Course = require('../models/Course');
-const Hole = require('../models/Hole');
-const TeeBox = require('../models/TeeBox');
+const { sequelize, GolfClub, Course, Hole, TeeBox } = require('../models'); 
 
 // POST a new golf club with courses, holes, and tee boxes
 router.post('/', async (req, res) => {
     const { golfClub, courses } = req.body;
     
-    // Add debug logs
+    // debug logs
     console.log("Request Body:", req.body);
     console.log("Golf Club:", golfClub);
     console.log("Courses:", courses);

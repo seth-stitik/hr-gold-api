@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const TeeBox = require('../models/TeeBox');
+const { TeeBox } = require('../models'); 
 
 // GET all tee boxes
 router.get('/', async (req, res) => {

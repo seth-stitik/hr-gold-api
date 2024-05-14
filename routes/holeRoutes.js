@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Hole = require('../models/Hole');
-const TeeBox = require('../models/TeeBox');
+const { Hole, TeeBox } = require('../models'); 
 
 // GET all holes
 router.get('/', async (req, res) => {
