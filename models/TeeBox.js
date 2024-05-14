@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-const { sequelize } = require('../config/database'); // Ensure correct import
+const { sequelize } = require('../config/database');
 
 const TeeBox = sequelize.define('TeeBox', {
   id: {
