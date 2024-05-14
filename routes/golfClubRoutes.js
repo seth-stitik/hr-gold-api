@@ -26,9 +26,26 @@ router.get('/', async (req, res) => {
 
 // POST a new golf club
 router.post('/', async (req, res) => {
+    const { golfClub, courses } = req.body;
+    
     try {
-        const newClub = await GolfClub.create(req.body);
-        res.status(201).json(newClub);
+        await sequelize.transaction(async (t) => {
+            const newGolfClub = await GolfClub.create(golfClub, { transaction: t });
+            
+            for (const course of courses) {
+                const newCourse = await Course.create({ ...course, golfClubName: newGolfClub.name }, { transaction: t });
+                
+                for (const hole of course.holes) {
+                    const newHole = await Hole.create({ ...hole, courseID: newCourse.courseID }, { transaction: t });
+                    
+                    for (const teeBox of hole.teeBoxes) {
+                        await TeeBox.create({ ...teeBox, holeNumber: newHole.holeNumber }, { transaction: t });
+                    }
+                }
+            }
+        });
+
+        res.status(201).json({ message: 'Golf club with courses, holes, and tee boxes created successfully.' });
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Server error' });
