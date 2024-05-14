@@ -16,13 +16,13 @@ router.post('/', async (req, res) => {
             const newGolfClub = await GolfClub.create(golfClub, { transaction: t });
             
             for (const course of courses) {
-                const newCourse = await Course.create({ ...course, golfClubName: newGolfClub.name }, { transaction: t });
+                const newCourse = await Course.create({ ...course, golfClubName: newGolfClub.name, clubID: newGolfClub.clubID }, { transaction: t });
                 
                 for (const hole of course.holes) {
-                    const newHole = await Hole.create({ ...hole, courseID: newCourse.courseID }, { transaction: t });
+                    const newHole = await Hole.create({ ...hole, courseID: newCourse.courseID, clubID: newGolfClub.clubID }, { transaction: t });
                     
                     for (const teeBox of hole.teeBoxes) {
-                        await TeeBox.create({ ...teeBox, holeNumber: newHole.holeNumber }, { transaction: t });
+                        await TeeBox.create({ ...teeBox, holeNumber: newHole.holeNumber, courseID: newCourse.courseID, clubID: newGolfClub.clubID }, { transaction: t });
                     }
                 }
             }
