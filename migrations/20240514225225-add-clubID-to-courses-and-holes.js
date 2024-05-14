@@ -1,22 +1,53 @@
 'use strict';
 
-/** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
-    /**
-     * Add altering commands here.
-     *
-     * Example:
-     * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
-     */
+  up: async (queryInterface, Sequelize) => {
+    await queryInterface.addColumn('courses', 'clubID', {
+      type: Sequelize.STRING,
+      allowNull: false,
+      references: {
+        model: 'golf_clubs',
+        key: 'clubID'
+      },
+      onUpdate: 'CASCADE',
+      onDelete: 'CASCADE'
+    });
+    await queryInterface.addColumn('holes', 'clubID', {
+      type: Sequelize.STRING,
+      allowNull: false,
+      references: {
+        model: 'golf_clubs',
+        key: 'clubID'
+      },
+      onUpdate: 'CASCADE',
+      onDelete: 'CASCADE'
+    });
+    await queryInterface.addColumn('tee_boxes', 'courseID', {
+      type: Sequelize.STRING,
+      allowNull: false,
+      references: {
+        model: 'courses',
+        key: 'courseID'
+      },
+      onUpdate: 'CASCADE',
+      onDelete: 'CASCADE'
+    });
+    await queryInterface.addColumn('tee_boxes', 'clubID', {
+      type: Sequelize.STRING,
+      allowNull: false,
+      references: {
+        model: 'golf_clubs',
+        key: 'clubID'
+      },
+      onUpdate: 'CASCADE',
+      onDelete: 'CASCADE'
+    });
   },
 
-  async down (queryInterface, Sequelize) {
-    /**
-     * Add reverting commands here.
-     *
-     * Example:
-     * await queryInterface.dropTable('users');
-     */
+  down: async (queryInterface, Sequelize) => {
+    await queryInterface.removeColumn('courses', 'clubID');
+    await queryInterface.removeColumn('holes', 'clubID');
+    await queryInterface.removeColumn('tee_boxes', 'courseID');
+    await queryInterface.removeColumn('tee_boxes', 'clubID');
   }
 };
