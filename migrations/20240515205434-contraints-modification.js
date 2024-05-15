@@ -2,56 +2,20 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('holes', {
-      holeNumber: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        primaryKey: true,
-      },
-      par: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-      },
-      yardage: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-      },
-      handicap: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-      },
-      courseID: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        primaryKey: true,
-        references: {
-          model: 'courses',
-          key: 'courseID',
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
-      },
-      clubID: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        references: {
-          model: 'golf_clubs',
-          key: 'clubID',
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE,
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE,
-      },
+    // Drop the existing primary key constraint on holeNumber
+    await queryInterface.removeConstraint('holes', 'holes_pkey');
+
+    // Modify the table to add the composite primary key
+    await queryInterface.changeColumn('holes', 'holeNumber', {
+      type: Sequelize.INTEGER,
+      allowNull: false,
     });
 
-    // Adding composite primary key
+    await queryInterface.changeColumn('holes', 'courseID', {
+      type: Sequelize.STRING,
+      allowNull: false,
+    });
+
     await queryInterface.addConstraint('holes', {
       fields: ['holeNumber', 'courseID'],
       type: 'primary key',
@@ -60,6 +24,14 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('holes');
+    // Remove composite primary key constraint
+    await queryInterface.removeConstraint('holes', 'holes_pkey');
+
+    // Re-add original primary key constraint on holeNumber
+    await queryInterface.addConstraint('holes', {
+      fields: ['holeNumber'],
+      type: 'primary key',
+      name: 'holes_pkey'
+    });
   }
 };
