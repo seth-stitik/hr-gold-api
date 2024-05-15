@@ -1,12 +1,23 @@
 'use strict';
 
+const checkAndRemoveConstraint = async (queryInterface, tableName, constraintName) => {
+  const constraints = await queryInterface.showConstraint(tableName);
+  const constraintExists = constraints.some((constraint) => constraint.constraintName === constraintName);
+
+  if (constraintExists) {
+    console.log(`Removing constraint ${constraintName} from table ${tableName}...`);
+    await queryInterface.removeConstraint(tableName, constraintName);
+  } else {
+    console.log(`Constraint ${constraintName} does not exist on table ${tableName}. Skipping removal.`);
+  }
+};
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     try {
-      console.log('Removing foreign key constraints from tee_boxes...');
-      await queryInterface.removeConstraint('tee_boxes', 'tee_boxes_holeNumber_fkey');
-      await queryInterface.removeConstraint('tee_boxes', 'tee_boxes_courseID_fkey');
-      await queryInterface.removeConstraint('tee_boxes', 'tee_boxes_clubID_fkey');
+      await checkAndRemoveConstraint(queryInterface, 'tee_boxes', 'tee_boxes_holeNumber_fkey');
+      await checkAndRemoveConstraint(queryInterface, 'tee_boxes', 'tee_boxes_courseID_fkey');
+      await checkAndRemoveConstraint(queryInterface, 'tee_boxes', 'tee_boxes_clubID_fkey');
 
       console.log('Removing primary key constraint from holes...');
       await queryInterface.removeConstraint('holes', 'holes_pkey');
