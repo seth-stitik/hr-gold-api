@@ -4,12 +4,12 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     try {
       // Remove foreign key constraints from tee_boxes if they exist
-      await queryInterface.removeConstraint('tee_boxes', 'tee_boxes_holeNumber_fkey', { ifExists: true });
-      await queryInterface.removeConstraint('tee_boxes', 'tee_boxes_courseID_fkey', { ifExists: true });
-      await queryInterface.removeConstraint('tee_boxes', 'tee_boxes_clubID_fkey', { ifExists: true });
+      await queryInterface.removeConstraint('tee_boxes', 'tee_boxes_holeNumber_fkey').catch(() => console.log('Constraint tee_boxes_holeNumber_fkey does not exist on table tee_boxes. Skipping removal.'));
+      await queryInterface.removeConstraint('tee_boxes', 'tee_boxes_courseID_fkey').catch(() => console.log('Constraint tee_boxes_courseID_fkey does not exist on table tee_boxes. Skipping removal.'));
+      await queryInterface.removeConstraint('tee_boxes', 'tee_boxes_clubID_fkey').catch(() => console.log('Constraint tee_boxes_clubID_fkey does not exist on table tee_boxes. Skipping removal.'));
 
       // Remove primary key constraint from holes table
-      await queryInterface.removeConstraint('holes', 'holes_pkey', { ifExists: true });
+      await queryInterface.removeConstraint('holes', 'holes_pkey').catch(() => console.log('Constraint holes_pkey does not exist on table holes. Skipping removal.'));
 
       // Modify columns to allow composite primary key
       await queryInterface.changeColumn('holes', 'holeNumber', {
@@ -62,11 +62,11 @@ module.exports = {
   down: async (queryInterface, Sequelize) => {
     try {
       // Remove foreign key constraints from tee_boxes
-      await queryInterface.removeConstraint('tee_boxes', 'tee_boxes_holeNumber_courseID_fkey', { ifExists: true });
-      await queryInterface.removeConstraint('tee_boxes', 'tee_boxes_clubID_fkey', { ifExists: true });
+      await queryInterface.removeConstraint('tee_boxes', 'tee_boxes_holeNumber_courseID_fkey').catch(() => console.log('Constraint tee_boxes_holeNumber_courseID_fkey does not exist on table tee_boxes. Skipping removal.'));
+      await queryInterface.removeConstraint('tee_boxes', 'tee_boxes_clubID_fkey').catch(() => console.log('Constraint tee_boxes_clubID_fkey does not exist on table tee_boxes. Skipping removal.'));
 
       // Remove composite primary key constraint from holes
-      await queryInterface.removeConstraint('holes', 'holes_pkey', { ifExists: true });
+      await queryInterface.removeConstraint('holes', 'holes_pkey').catch(() => console.log('Constraint holes_pkey does not exist on table holes. Skipping removal.'));
 
       // Re-add original primary key constraint on holeNumber
       await queryInterface.addConstraint('holes', {
