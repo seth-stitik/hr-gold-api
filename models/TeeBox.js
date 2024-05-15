@@ -1,15 +1,14 @@
-'use strict';
-module.exports = (sequelize, DataTypes) => {
+const { DataTypes } = require('sequelize');
+
+module.exports = (sequelize) => {
   const TeeBox = sequelize.define('TeeBox', {
     teetype: {
       type: DataTypes.STRING,
-      allowNull: false,
-      primaryKey: true
+      allowNull: false
     },
     teeColor: {
       type: DataTypes.STRING,
-      allowNull: false,
-      primaryKey: true
+      allowNull: false
     },
     distance: {
       type: DataTypes.INTEGER,
@@ -18,7 +17,6 @@ module.exports = (sequelize, DataTypes) => {
     holeNumber: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      primaryKey: true,
       references: {
         model: 'holes',
         key: 'holeNumber'
@@ -48,7 +46,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     tableName: 'tee_boxes',
-    timestamps: true
+    timestamps: true,
+    primaryKey: ['holeNumber', 'courseID', 'clubID', 'teetype', 'teeColor']
   });
 
   TeeBox.associate = (models) => {
