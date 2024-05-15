@@ -1,7 +1,5 @@
-// models/GolfClub.js
-const { DataTypes } = require('sequelize');
-
-module.exports = (sequelize) => {
+'use strict';
+module.exports = (sequelize, DataTypes) => {
   const GolfClub = sequelize.define('GolfClub', {
     clubID: {
       type: DataTypes.STRING,

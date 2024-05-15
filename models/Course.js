@@ -1,6 +1,5 @@
-const { DataTypes } = require('sequelize');
-
-module.exports = (sequelize) => {
+'use strict';
+module.exports = (sequelize, DataTypes) => {
   const Course = sequelize.define('Course', {
     courseID: {
       type: DataTypes.STRING,
