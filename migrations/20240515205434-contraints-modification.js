@@ -7,10 +7,10 @@ module.exports = {
     await queryInterface.removeConstraint('tee_boxes', 'tee_boxes_courseID_fkey');
     await queryInterface.removeConstraint('tee_boxes', 'tee_boxes_clubID_fkey');
 
-    // Drop the existing primary key constraint on holeNumber
+    // Remove primary key constraint on holes table
     await queryInterface.removeConstraint('holes', 'holes_pkey');
 
-    // Modify the table to add the composite primary key
+    // Modify columns to allow composite primary key
     await queryInterface.changeColumn('holes', 'holeNumber', {
       type: Sequelize.INTEGER,
       allowNull: false,
@@ -21,6 +21,7 @@ module.exports = {
       allowNull: false,
     });
 
+    // Add composite primary key constraint
     await queryInterface.addConstraint('holes', {
       fields: ['holeNumber', 'courseID'],
       type: 'primary key',
@@ -29,24 +30,12 @@ module.exports = {
 
     // Re-add foreign key constraints on tee_boxes
     await queryInterface.addConstraint('tee_boxes', {
-      fields: ['holeNumber'],
+      fields: ['holeNumber', 'courseID'],
       type: 'foreign key',
       name: 'tee_boxes_holeNumber_fkey',
       references: {
         table: 'holes',
-        field: 'holeNumber'
-      },
-      onUpdate: 'CASCADE',
-      onDelete: 'CASCADE'
-    });
-
-    await queryInterface.addConstraint('tee_boxes', {
-      fields: ['courseID'],
-      type: 'foreign key',
-      name: 'tee_boxes_courseID_fkey',
-      references: {
-        table: 'holes',
-        field: 'courseID'
+        fields: ['holeNumber', 'courseID']
       },
       onUpdate: 'CASCADE',
       onDelete: 'CASCADE'
@@ -68,10 +57,9 @@ module.exports = {
   down: async (queryInterface, Sequelize) => {
     // Remove foreign key constraints from tee_boxes
     await queryInterface.removeConstraint('tee_boxes', 'tee_boxes_holeNumber_fkey');
-    await queryInterface.removeConstraint('tee_boxes', 'tee_boxes_courseID_fkey');
     await queryInterface.removeConstraint('tee_boxes', 'tee_boxes_clubID_fkey');
 
-    // Remove composite primary key constraint
+    // Remove composite primary key constraint from holes
     await queryInterface.removeConstraint('holes', 'holes_pkey');
 
     // Re-add original primary key constraint on holeNumber
