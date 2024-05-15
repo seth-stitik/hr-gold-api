@@ -1,6 +1,7 @@
+// routes/golfClubRoutes.js
 const express = require('express');
 const router = express.Router();
-const { sequelize, GolfClub, Course, Hole, TeeBox } = require('../models'); 
+const { sequelize, GolfClub, Course, Hole, TeeBox } = require('../models');
 
 // Function to create a golf club with courses, holes, and tee boxes
 const createGolfClub = async (req, res) => {
@@ -19,7 +20,7 @@ const createGolfClub = async (req, res) => {
         const newCourse = await Course.create(
           {
             ...course,
-            golfClubName: newGolfClub.name,
+            golfClubName: newGolfClub.name, // Ensure this field matches your model definition
             clubID: newGolfClub.clubID
           },
           { transaction: t }
