@@ -47,7 +47,12 @@ module.exports = (sequelize) => {
   }, {
     tableName: 'tee_boxes',
     timestamps: true,
-    primaryKey: ['holeNumber', 'courseID', 'clubID', 'teetype', 'teeColor']
+    indexes: [
+      {
+        unique: true,
+        fields: ['teetype', 'teeColor', 'holeNumber', 'courseID', 'clubID']
+      }
+    ]
   });
 
   TeeBox.associate = (models) => {
