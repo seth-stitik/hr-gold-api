@@ -29,7 +29,10 @@ const createGolfClub = async (req, res) => {
         for (const hole of course.holes) {
           const newHole = await Hole.create(
             {
-              ...hole,
+              holeNumber: hole.holeNumber,
+              par: hole.par,
+              yardage: hole.yardage,
+              handicap: hole.handicap,
               courseID: newCourse.courseID,
               clubID: newGolfClub.clubID
             },

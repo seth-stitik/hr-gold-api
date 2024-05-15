@@ -1,9 +1,11 @@
-'use strict';
-module.exports = (sequelize, DataTypes) => {
+const { DataTypes } = require('sequelize');
+
+module.exports = (sequelize) => {
   const Hole = sequelize.define('Hole', {
     holeNumber: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      primaryKey: true,
     },
     par: {
       type: DataTypes.INTEGER,
@@ -20,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     courseID: {
       type: DataTypes.STRING,
       allowNull: false,
+      primaryKey: true,
       references: {
         model: 'courses',
         key: 'courseID',
@@ -36,11 +39,6 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     tableName: 'holes',
     timestamps: true,
-    uniqueKeys: {
-      unique_hole_course: {
-        fields: ['holeNumber', 'courseID'],
-      },
-    },
   });
 
   Hole.associate = (models) => {
