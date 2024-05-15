@@ -31,12 +31,12 @@ module.exports = {
 
       console.log('Re-adding foreign key constraints to tee_boxes...');
       await queryInterface.addConstraint('tee_boxes', {
-        fields: ['holeNumber'],
+        fields: ['holeNumber', 'courseID'],
         type: 'foreign key',
         name: 'tee_boxes_holeNumber_fkey',
         references: {
           table: 'holes',
-          field: 'holeNumber',
+          fields: ['holeNumber', 'courseID'],
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
