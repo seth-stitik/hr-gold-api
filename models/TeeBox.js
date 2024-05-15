@@ -4,11 +4,13 @@ module.exports = (sequelize) => {
   const TeeBox = sequelize.define('TeeBox', {
     teetype: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      primaryKey: true
     },
     teeColor: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      primaryKey: true
     },
     distance: {
       type: DataTypes.INTEGER,
@@ -17,6 +19,7 @@ module.exports = (sequelize) => {
     holeNumber: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      primaryKey: true,
       references: {
         model: 'holes',
         key: 'holeNumber'
@@ -27,6 +30,7 @@ module.exports = (sequelize) => {
     courseID: {
       type: DataTypes.STRING,
       allowNull: false,
+      primaryKey: true,
       references: {
         model: 'courses',
         key: 'courseID'
@@ -37,6 +41,7 @@ module.exports = (sequelize) => {
     clubID: {
       type: DataTypes.STRING,
       allowNull: false,
+      primaryKey: true,
       references: {
         model: 'golf_clubs',
         key: 'clubID'
@@ -46,13 +51,7 @@ module.exports = (sequelize) => {
     }
   }, {
     tableName: 'tee_boxes',
-    timestamps: true,
-    indexes: [
-      {
-        unique: true,
-        fields: ['teetype', 'teeColor', 'holeNumber', 'courseID', 'clubID']
-      }
-    ]
+    timestamps: true
   });
 
   TeeBox.associate = (models) => {
