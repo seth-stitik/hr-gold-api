@@ -1,0 +1,31 @@
+{
+  "development": {
+    "username": "dev",
+    "password": "Sandsnow97!",
+    "database": "vbgolfapi",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "migrationsPath": "migrations"
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "u7p0tq1c1gurbe",
+    "password": "p06d033995da5176b84e49ba30ea5256dc552ca5b5f5a2b7d7c94f18b295a8a37",
+    "database": "dcalvutfh3u9gv",
+    "host": "c5hilnj7pn10vb.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com",
+    "dialect": "postgres",
+    "port": 5432,
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    }
+  }
+}
